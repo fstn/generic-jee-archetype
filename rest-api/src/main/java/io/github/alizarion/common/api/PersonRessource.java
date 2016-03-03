@@ -5,6 +5,7 @@ import io.github.alizarion.common.services.EntityFacade;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.annotation.WebServlet;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;

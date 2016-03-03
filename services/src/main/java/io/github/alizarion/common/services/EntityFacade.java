@@ -4,6 +4,8 @@ import io.github.alizarion.common.dao.PersonDao;
 import io.github.alizarion.common.entities.Person;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.ejb.Stateful;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

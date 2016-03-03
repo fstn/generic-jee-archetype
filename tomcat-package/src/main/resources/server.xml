@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="8005" shutdown="SHUTDOWN">
+
+    <Listener className="org.apache.catalina.core.JasperListener" />
+    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+    <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+    <GlobalNamingResources>
+        <Resource name="UserDatabase" auth="Container"
+                  type="org.apache.catalina.UserDatabase"
+                  description="User database that can be updated and saved"
+                  factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+                  pathname="conf/tomcat-users.xml" />
+        <Resource name="java:/PersonDS" auth="Container"
+                  type="javax.sql.DataSource"
+                  driverClassName="org.h2.Driver"
+                  url="jdbc:h2:mem:personDS"
+                  username="sa" password=""
+                  maxActive="20" maxIdle="10" maxWait="-1"
+                  description="Datasource to person database"  />
+    </GlobalNamingResources>
+    <Service name="Catalina">
+        <Connector port="8080" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="8443" />
+
+        <Engine name="Catalina" defaultHost="127.0.0.1">
+
+            <Host appBase="webapps" autoDeploy="true" deployXML="false"
+                  name="127.0.0.1" unpackWARs="true">
+                <Context docBase="../../tomcat-package-1.0.0-SNAPSHOT"
+                         path="/tomcat-package" reloadable="true" />
+                <Valve className="org.apache.catalina.valves.AccessLogValve"
+                       directory="logs"
+                       prefix="localhost_access_log." suffix=".txt"
+                       pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+            </Host>
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+                <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                       resourceName="UserDatabase"/>
+            </Realm>
+
+        </Engine>
+    </Service>
+</Server>

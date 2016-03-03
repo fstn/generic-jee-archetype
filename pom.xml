@@ -20,6 +20,7 @@
         <module>services</module>
         <module>rest-api</module>
         <module>wildfly-package</module>
+        <module>tomcat-package</module>
         <module>tools</module>
 
     </modules>
@@ -31,3 +32,4 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 </project>
+
